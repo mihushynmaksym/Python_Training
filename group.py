@@ -1,4 +1,4 @@
-_author_ = "Max"
+__author__ = "Max"
 
 class Group:
 

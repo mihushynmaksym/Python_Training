@@ -9,8 +9,6 @@ def app(request):
     request.addfinalizer(fixture.destroy)
     return fixture
 
-
-    
 def test_add__group(app):
     app.Login(user_name="admin", password="secret")
     app.Create_group(Group(name="xzczx", header="sadwqe", footer="vbngt"))
