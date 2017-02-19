@@ -1,6 +1,7 @@
 __author__ = 'Max'
 
 
+
 class GroupHelper:
 
     def __init__(self,app):
@@ -8,7 +9,9 @@ class GroupHelper:
 
     def Submit_creation(self):
         wd = self.app.wd
+        #submit
         wd.find_element_by_name("submit").click()
+        # click return to home page
         wd.find_element_by_link_text("group page").click()
 
     def Create(self, group):
@@ -23,3 +26,14 @@ class GroupHelper:
         wd.find_element_by_name("group_footer").click()
         wd.find_element_by_name("group_footer").clear()
         wd.find_element_by_name("group_footer").send_keys(group.footer)
+
+
+    def delete_first_group(self):
+        #Login
+        wd = self.app.wd
+        #select first group
+        wd.find_element_by_name("selected[]").click()
+        #submit deletion
+        wd.find_element_by_name("delete").click()
+        #click return to home page
+        wd.find_element_by_link_text("group page").click()
