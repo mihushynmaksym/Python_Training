@@ -1,16 +1,13 @@
 __author__ = 'Max'
 
 from selenium.webdriver.firefox.webdriver import WebDriver
+from fixture.session import SessionHelper
 
 class Application:
     def __init__(self):
         self.wd = WebDriver()
         self.wd.implicitly_wait(60)
-
-    def Logout(self):
-        wd = self.wd
-        wd.find_element_by_link_text("Logout").click()
-
+        self.session = SessionHelper(self)
 
     def Submit_group_creation(self):
         wd = self.wd
@@ -29,20 +26,6 @@ class Application:
         wd.find_element_by_name("group_footer").click()
         wd.find_element_by_name("group_footer").clear()
         wd.find_element_by_name("group_footer").send_keys(group.footer)
-
-
-    def Login(self,user_name, password):
-        wd = self.wd
-        wd.get("http://localhost/addressbook/group.php")
-        wd.find_element_by_id("LoginForm").click()
-        wd.find_element_by_name("user").click()
-        wd.find_element_by_name("user").clear()
-        wd.find_element_by_name("user").send_keys(user_name)
-        wd.find_element_by_name("pass").click()
-        wd.find_element_by_name("pass").clear()
-        wd.find_element_by_name("pass").send_keys(password)
-        wd.find_element_by_xpath("//form[@id='LoginForm']/input[3]").click()
-
 
     def destroy(self):
         self.wd.quit()
