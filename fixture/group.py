@@ -41,3 +41,61 @@ class GroupHelper:
         wd.find_element_by_name("delete").click()
         #click return to home page
         wd.find_element_by_link_text("group page").click()
+
+
+    def modify_group_name(self, group):
+        # Login
+        wd = self.app.wd
+        # select first group
+        wd.find_element_by_name("selected[]").click()
+        # submit edit
+        wd.find_element_by_name("edit").click()
+        #click field Group name, clear field
+        wd.find_element_by_name("group_name").click()
+        wd.find_element_by_name("group_name").clear()
+        #change group name
+        wd.find_element_by_name("group_name").send_keys(group.name)
+        #submit Update
+        wd.find_element_by_name("update").click()
+
+    def modify_group_header(self, group):
+        # Login
+        wd = self.app.wd
+        # select first group
+        wd.find_element_by_name("selected[]").click()
+        # submit edit
+        wd.find_element_by_name("edit").click()
+        # click field Group header, clear field
+        wd.find_element_by_name("group_header").click()
+        wd.find_element_by_name("group_header").clear()
+        # change group header
+        wd.find_element_by_name("group_header").send_keys(group.header)
+        # submit Update
+        wd.find_element_by_name("update").click()
+
+    def modify_group_footer(self, group):
+        # Login
+        wd = self.app.wd
+        # select first group
+        wd.find_element_by_name("selected[]").click()
+        # submit edit
+        wd.find_element_by_name("edit").click()
+        # click field Group header, clear field
+        wd.find_element_by_name("group_footer").click()
+        wd.find_element_by_name("group_footer").clear()
+        # change group footer
+        wd.find_element_by_name("group_footer").send_keys(group.footer)
+        # submit Update
+        wd.find_element_by_name("update").click()
+
+
+    def submit_update(self):
+        wd = self.app.wd
+        #submit Update
+        wd.find_element_by_name("update").click()
+
+
+
+
+
+
