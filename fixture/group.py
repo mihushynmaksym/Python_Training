@@ -6,16 +6,14 @@ class GroupHelper:
     def __init__(self,app):
         self.app = app
 
-
-    def Submit_creation(self):
+    def submit_creation(self):
         wd = self.app.wd
         #submit
         wd.find_element_by_name("submit").click()
         # click return to home page
         wd.find_element_by_link_text("group page").click()
 
-
-    def Create(self, group):
+    def create(self, group):
         wd = self.app.wd
         #initiate create group
         wd.find_element_by_name("new").click()
@@ -31,7 +29,6 @@ class GroupHelper:
         #click submit
         wd.find_element_by_name("group_footer").send_keys(group.footer)
 
-
     def delete_first_group(self):
         #Login
         wd = self.app.wd
@@ -41,7 +38,6 @@ class GroupHelper:
         wd.find_element_by_name("delete").click()
         #click return to home page
         wd.find_element_by_link_text("group page").click()
-
 
     def modify_group_name(self, group):
         # Login
@@ -87,7 +83,6 @@ class GroupHelper:
         wd.find_element_by_name("group_footer").send_keys(group.footer)
         # submit Update
         wd.find_element_by_name("update").click()
-
 
     def submit_update(self):
         wd = self.app.wd
