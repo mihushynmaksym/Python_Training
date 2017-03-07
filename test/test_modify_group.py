@@ -3,6 +3,26 @@ __author__ = "Max"
 
 from model.group import Group
 
+# def test_modify_group_name(app):
+#     app.session.login(user_name="admin", password="secret")
+#     app.group.modify_group_name(Group(name="", header="", footer=""))
+#     app.group.submit_update()
+#     app.session.logout()
+#
+#
+# def test_modify_group_header(app):
+#    app.session.login(user_name="admin", password="secret")
+#    app.group.modify_group_header(Group(name="", header="", footer=""))
+#    app.group.submit_update()
+#    app.session.logout()
+#
+#
+# def test_modify_group_footer(app):
+#    app.session.login(user_name="admin", password="secret")
+#    app.group.modify_group_footer(Group(name="", header="", footer=""))
+#    app.group.submit_update()
+#    app.session.logout()
+
 
 def test_modify_group_name(app):
     app.session.login(user_name="admin", password="secret")
