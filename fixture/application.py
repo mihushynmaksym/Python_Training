@@ -8,7 +8,7 @@ from fixture.group import GroupHelper
 class Application:
     def __init__(self):
         self.wd = webdriver.Chrome("D:\Chromedriver\chromedriver")
-        self.wd.implicitly_wait(5)
+        # self.wd.implicitly_wait(5) Delay timer for dynamic web pages
         self.session = SessionHelper(self)
         self.group = GroupHelper(self)
 
