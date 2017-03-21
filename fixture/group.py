@@ -64,8 +64,11 @@ class GroupHelper:
         wd = self.app.wd
         wd.find_element_by_name("update").click()
 
+    def count(self):
+        wd = self.app.wd
+        return len(wd.find_elements_by_name("selected[]"))
 
-
+    # Another way to test_modify_group
     # def modify_group_name(self, group):
     #     # Login
     #     wd = self.app.wd
