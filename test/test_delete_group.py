@@ -8,4 +8,7 @@ def test_delete_first_group(app):
     if app.group.count() == 0:
        app.group.create(Group(name="xzczx", header="sadwqe", footer="vbngt"))
        app.group.submit_creation()
+    old_groups = app.group.get_group_list()
     app.group.delete_first_group()
+    new_group = app.group.get_group_list()
+    assert len(old_groups) - 1 == len(new_group)

@@ -7,22 +7,30 @@ def test_modify_group_name(app):
     if app.group.count() == 0:
         app.group.create(Group(name="xzczx", header="sadwqe", footer="vbngt"))
         app.group.submit_creation()
+    old_groups = app.group.get_group_list()
     app.group.modify_first_group(Group(name="New group"))
+    new_group = app.group.get_group_list()
+    assert len(old_groups) == len(new_group)
 
 
 def test_modify_group_header(app):
     if app.group.count() == 0:
         app.group.create(Group(name="xzczx", header="sadwqe", footer="vbngt"))
         app.group.submit_creation()
+    old_groups = app.group.get_group_list()
     app.group.modify_first_group(Group(header="New header"))
+    new_group = app.group.get_group_list()
+    assert len(old_groups) == len(new_group)
 
 
 def test_modify_group_footer(app):
     if app.group.count() == 0:
         app.group.create(Group(name="xzczx", header="sadwqe", footer="vbngt"))
         app.group.submit_creation()
+    old_groups = app.group.get_group_list()
     app.group.modify_first_group(Group(footer="New footer"))
-
+    new_group = app.group.get_group_list()
+    assert len(old_groups) == len(new_group)
 
 # Another way to test_modify_group
 # def test_modify_group_name(app):
