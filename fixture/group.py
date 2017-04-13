@@ -27,6 +27,7 @@ class GroupHelper:
         self.group_page()
         wd.find_element_by_name("new").click()
         self.fill_group_form(group)
+        self.submit_creation()
 
     def fill_group_form(self, group):
         self.change_field_value("group_name", group.name)
@@ -83,6 +84,10 @@ class GroupHelper:
             id = element.find_element_by_name("selected[]").get_attribute("value")
             groups.append(Group(name=text,id=id))
         return groups
+
+    def if_not_group_create_group(self):
+        if self.count() == 0:
+            self.create(Group(name="xzczx", header="sadwqe", footer="vbngt"))
 
     # Another way to test_modify_group
     # def modify_group_name(self, group):

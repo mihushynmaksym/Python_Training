@@ -1,17 +1,13 @@
 __author__ = 'Max'
 
 
-from model.group import Group
-
-
 def test_delete_first_group(app):
-    if app.group.count() == 0:
-       app.group.create(Group(name="xzczx", header="sadwqe", footer="vbngt"))
-       app.group.submit_creation()
-    old_groups = app.group.get_group_list()
+    app.group.if_not_group_create_group() # if not have any groups = create group
+    old_groups = app.group.get_group_list()  # Check lists - 1 (delete group)
     app.group.delete_first_group()
-    new_group = app.group.get_group_list()
-    assert len(old_groups) - 1 == len(new_group)
-    old_groups[0:1] = []
-    assert old_groups == new_group
+    new_group = app.group.get_group_list()  # Check lists - 1 (delete group)
+    assert len(old_groups) - 1 == len(new_group)  # Check lists - 1 (delete group)
+    old_groups[0:1] = []  # Check lists - 1 (delete group)
+    assert old_groups == new_group  # Check lists - 1 (delete group)
+
 

@@ -4,33 +4,39 @@ from model.group import Group
 
 
 def test_modify_group_name(app):
-    if app.group.count() == 0:
-        app.group.create(Group(name="xzczx", header="sadwqe", footer="vbngt"))
-        app.group.submit_creation()
-    old_groups = app.group.get_group_list()
-    app.group.modify_first_group(Group(name="New group"))
-    new_group = app.group.get_group_list()
-    assert len(old_groups) == len(new_group)
+    app.group.if_not_group_create_group() # if not have any groups = create group
+    old_groups = app.group.get_group_list()  # Check lists == 0(modify group)
+    group = (Group(name="New group"))
+    group.id = old_groups[0].id  # save ID for assert = 0
+    app.group.modify_first_group(group)
+    new_group = app.group.get_group_list()  # Check lists == 0(modify group)
+    assert len(old_groups) == len(new_group)  # Check lists == 0(modify group)
+    old_groups[0] = group # save ID for assert = 0
+    assert sorted(old_groups, key=Group.id_or_max) == sorted(new_group, key=Group.id_or_max)  # assert lists
 
 
-def test_modify_group_header(app):
-    if app.group.count() == 0:
-        app.group.create(Group(name="xzczx", header="sadwqe", footer="vbngt"))
-        app.group.submit_creation()
-    old_groups = app.group.get_group_list()
-    app.group.modify_first_group(Group(header="New header"))
-    new_group = app.group.get_group_list()
-    assert len(old_groups) == len(new_group)
-
-
-def test_modify_group_footer(app):
-    if app.group.count() == 0:
-        app.group.create(Group(name="xzczx", header="sadwqe", footer="vbngt"))
-        app.group.submit_creation()
-    old_groups = app.group.get_group_list()
-    app.group.modify_first_group(Group(footer="New footer"))
-    new_group = app.group.get_group_list()
-    assert len(old_groups) == len(new_group)
+# def test_modify_group_header(app):
+#     app.group.if_not_group_create_group() # if not have any groups = create group
+#     old_groups = app.group.get_group_list()  # Check lists == 0(modify group)
+#     group = (Group(header="New header"))
+#     group.id = old_groups[0].id  # save ID for assert = 0
+#     app.group.modify_first_group(group)
+#     new_group = app.group.get_group_list()  # Check lists == 0(modify group)
+#     assert len(old_groups) == len(new_group)  # Check lists == 0(modify group)
+#     old_groups[0] = group  # save ID for assert = 0
+#     assert sorted(old_groups, key=Group.id_or_max) == sorted(new_group, key=Group.id_or_max)  # assert lists
+#
+#
+# def test_modify_group_footer(app):
+#     app.group.if_not_group_create_group() # if not have any groups = create group
+#     old_groups = app.group.get_group_list()  # Check lists == 0(modify group)
+#     group = (Group(footer="New footer"))
+#     group.id = old_groups[0].id  # save ID for assert = 0
+#     app.group.modify_first_group(group)
+#     new_group = app.group.get_group_list()  # Check lists == 0(modify group)
+#     assert len(old_groups) == len(new_group)  # Check lists == 0(modify group)
+#     old_groups[0] = group  # save ID for assert = 0
+#     assert sorted(old_groups, key=Group.id_or_max) == sorted(new_group, key=Group.id_or_max)  # assert lists
 
 # Another way to test_modify_group
 # def test_modify_group_name(app):

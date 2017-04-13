@@ -3,6 +3,7 @@ __author__ = 'Max'
 from selenium import webdriver
 from fixture.sesion import SessionHelper
 from fixture.group import GroupHelper
+from model.group import Group
 
 
 class Application:

@@ -1,5 +1,4 @@
 __author__ = 'Max'
-
 import pytest
 from fixture.application import Application
 
