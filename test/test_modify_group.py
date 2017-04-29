@@ -5,6 +5,7 @@ from random import randrange
 
 
 def test_modify_group_name(app):
+    app.group.find_group_button() # find button "group" on the page
     app.group.if_not_group_create_group()  # if not have any groups = create group
     old_groups = app.group.get_group_list()  # Check lists == 0(modify group)
     index = randrange(len(old_groups))  # add random for modify group

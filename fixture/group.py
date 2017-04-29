@@ -28,7 +28,7 @@ class GroupHelper:
         wd.find_element_by_name("new").click()
         self.fill_group_form(group)
         self.submit_creation()
-        self.group_cache = None
+        self.group_cache = None  # end cache function
 
     def fill_group_form(self, group):
         self.change_field_value("group_name", group.name)
@@ -63,7 +63,7 @@ class GroupHelper:
         self.fill_group_form(new_group_data)
         # submit modification form
         self.submit_update()
-        self.group_cache = None
+        self.group_cache = None  # end cache function
 
     def delete_first_group(self):
         self.delete_group_by_index(0)
@@ -77,7 +77,7 @@ class GroupHelper:
         wd.find_element_by_name("delete").click()
         # click return to home page
         wd.find_element_by_link_text("group page").click()
-        self.group_cache = None
+        self.group_cache = None  # end cache function
 
     def submit_update(self):
         wd = self.app.wd
@@ -91,18 +91,27 @@ class GroupHelper:
     group_cache = None
 
     def get_group_list(self):
+        # add cache function
         if self.group_cache is None:
-             wd = self.app.wd
-             self.group_cache = []
-             for element in wd.find_elements_by_css_selector("span.group"):
+            wd = self.app.wd
+            self.group_cache = []
+            for element in wd.find_elements_by_css_selector("span.group"):
                 text = element.text
                 id = element.find_element_by_name("selected[]").get_attribute("value")
                 self.group_cache.append(Group(name=text,id=id))
         return list(self.group_cache)
 
-    def if_not_group_create_group(self):
+    def if_not_group_create_group(self): # check for count groups if groups == 0: init create group.
         if self.count() == 0:
             self.create(Group(name="xzczx", header="sadwqe", footer="vbngt"))
+
+    def find_group_button(self):
+        wd = self.app.wd
+        wd.find_element_by_xpath(".//*[@id='nav']/ul/li[3]/a").click()
+
+    def find_home_button(self):
+        wd = self.app.wd
+        wd.find_element_by_xpath(".//*[@id='nav']/ul/li[1]/a").click()
 
     # Another way to test_modify_group
     # def modify_group_name(self, group):

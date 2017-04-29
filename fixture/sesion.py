@@ -8,7 +8,7 @@ class SessionHelper:
 
     def login(self,user_name, password):
         wd = self.app.wd
-        wd.get("http://localhost/addressbook/group.php")
+        wd.get("http://localhost/addressbook/")
         wd.find_element_by_id("LoginForm").click()
         wd.find_element_by_name("user").click()
         wd.find_element_by_name("user").clear()
@@ -17,6 +17,10 @@ class SessionHelper:
         wd.find_element_by_name("pass").clear()
         wd.find_element_by_name("pass").send_keys(password)
         wd.find_element_by_xpath("//form[@id='LoginForm']/input[3]").click()
+
+    def find_group_button(self):
+        wd = self.app.wd
+        wd.find_element_by_text("group").click()
 
     def logout(self):
         wd = self.app.wd

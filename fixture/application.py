@@ -3,6 +3,7 @@ __author__ = 'Max'
 from selenium import webdriver
 from fixture.sesion import SessionHelper
 from fixture.group import GroupHelper
+from fixture.contact import ContactHelper
 from model.group import Group
 
 
@@ -12,6 +13,7 @@ class Application:
         # self.wd.implicitly_wait(5) Delay timer for dynamic web pages
         self.session = SessionHelper(self)
         self.group = GroupHelper(self)
+        self.contact = ContactHelper(self)
 
     def submit_group_creation(self):
         wd = self.wd
