@@ -1,7 +1,8 @@
 __author__ = 'Max'
 
 from model.contact import Contact
-
+import re
+from fixture.group import GroupHelper
 
 class ContactHelper:
 
@@ -34,12 +35,20 @@ class ContactHelper:
 
     def open_contact_to_edit_by_index(self, index):
         wd = self.app.wd
+        if (wd.get!=("http://localhost/addressbook/")):
+            wd.find_element_by_xpath(".//*[@id='nav']/ul/li[1]/a").click()
+        else:
+            pass
         row = wd.find_elements_by_name('entry')[index]
         cell = row.find_elements_by_tag_name('td')[7]
         cell.find_element_by_tag_name('a').click()
 
     def open_contact_view_by_index(self, index):
         wd = self.app.wd
+        if (wd.get!=("http://localhost/addressbook/")):
+            wd.find_element_by_xpath(".//*[@id='nav']/ul/li[1]/a").click()
+        else:
+            pass
         row = wd.find_elements_by_name('entry')[index]
         cell = row.find_elements_by_tag_name('td')[6]
         cell.find_element_by_tag_name('a').click()
@@ -57,11 +66,12 @@ class ContactHelper:
         return Contact(firstname=firstname,lastname=lastname,id=id,homephone=homephone,workphone=workphone,
                        secondaryphone=secondaryphone,mobilephone=mobilephone)
 
-    def go_home_page(self):
+    def get_contact_from_view_page(self, index):
         wd = self.app.wd
-        if (wd.current_url.endswith("/group.php")):
-            wd.find_element_by_name('home').click()
-
-    def open_home_pag(self):
-        wd = self.app.wd
-        wd.find_element_by_name('home').click()
+        self.open_contact_view_by_index(index)
+        text = wd.find_element_by_id("content").text
+        homephone = re.search("H: (.*)", text).group(1)
+        workphone = re.search("W: (.*)", text).group(1)
+        secondaryphone = re.search("P: (.*)", text).group(1)
+        mobilephone = re.search("M: (.*)", text).group(1)
+        return Contact(homephone=homephone, workphone=workphone, secondaryphone=secondaryphone, mobilephone=mobilephone)

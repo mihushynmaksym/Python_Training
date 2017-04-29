@@ -113,6 +113,8 @@ class GroupHelper:
         wd = self.app.wd
         wd.find_element_by_xpath(".//*[@id='nav']/ul/li[1]/a").click()
 
+
+
     # Another way to test_modify_group
     # def modify_group_name(self, group):
     #     # Login
