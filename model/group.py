@@ -12,7 +12,7 @@ class Group:
         self.id = id
 
     def __repr__(self):
-        return "%s:%s" % (self.id, self.name)  # add more info in console for debug (compare lists)
+        return "%s:%s:%s:%s" % (self.id, self.name, self.footer, self.header)  # add more info in console for debug (compare lists)
 
     def __eq__(self, other):
         return (self.id is None or other.id is None or self.id == other.id) and self.name == other.name

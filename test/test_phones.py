@@ -19,7 +19,7 @@ def test_phones_on_contact_view_page(app):  # run without "clear" pattern
 
 
 def clear(s):
-    return re.sub("[()+!? -]", "", s)  # clear pattern for forms.
+    return re.sub("[()+!? -]", "", s)  # filter clear pattern for forms.
 
 
 def merge_phones_like_on_home_page(contact):  # merge all phons filter and assert
