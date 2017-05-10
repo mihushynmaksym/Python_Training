@@ -87,3 +87,5 @@ ENV/
 
 # Rope project settings
 .ropeproject
+envo/tcl/tk8.6/pkgIndex.tcl
+envo/Scripts/activate.ps1
