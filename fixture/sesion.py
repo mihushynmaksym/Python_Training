@@ -1,5 +1,6 @@
 __author__ = 'Max'
 
+from conftest import Application
 
 class SessionHelper:
 
@@ -8,7 +9,7 @@ class SessionHelper:
 
     def login(self,user_name, password):
         wd = self.app.wd
-        wd.get("http://localhost/addressbook/")
+        wd.get(self.conftest.application.base_url)
         wd.find_element_by_id("LoginForm").click()
         wd.find_element_by_name("user").click()
         wd.find_element_by_name("user").clear()

@@ -1,7 +1,6 @@
-__author__ = 'Max'
-
 
 from model.group import Group
+__author__ = 'Max'
 
 
 class GroupHelper:

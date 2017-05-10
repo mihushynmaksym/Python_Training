@@ -1,7 +1,7 @@
-__author__ = "Max"
 
 from model.group import Group
 from random import randrange
+__author__ = "Max"
 
 
 def test_modify_group_name(app):

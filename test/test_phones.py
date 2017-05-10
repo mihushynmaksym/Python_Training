@@ -1,5 +1,6 @@
-__author__ = "Max"
+
 import re
+__author__ = "Max"
 
 
 def test_phones_on_home_page(app):  # reverse check
@@ -22,7 +23,7 @@ def clear(s):
     return re.sub("[()+!? -]", "", s)  # filter clear pattern for forms.
 
 
-def merge_phones_like_on_home_page(contact):  # merge all phons filter and assert
+def merge_phones_like_on_home_page(contact):  # merge all phones filter and assert
         return "\n".join(filter(lambda x: x != "", map(lambda x: clear(x),filter(lambda x: x is not None,
                                                      [contact.homephone, contact.mobilephone, contact.workphone,
                                                       contact.secondaryphone]))))

@@ -1,8 +1,8 @@
-__author__ = 'Max'
 
 from model.contact import Contact
 import re
 from fixture.group import GroupHelper
+__author__ = 'Max'
 
 class ContactHelper:
 
