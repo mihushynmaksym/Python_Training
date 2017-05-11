@@ -6,6 +6,7 @@ from selenium import webdriver
 from fixture.sesion import SessionHelper
 from fixture.group import GroupHelper
 from fixture.contact import ContactHelper
+import importlib
 __author__ = 'Max'
 
 
@@ -42,6 +43,16 @@ def pytest_addoption(parser):
     parser.addoption("--browser",action="store",default="chrome")
     # hooks for links
     parser.addoption("--target",action="store",default="target.json")
+
+
+def pytest_generate_tests(metafunc):
+    for fixture in metafunc.fixturenames:
+        if fixture.startswith("data_"):
+            testdata=load_form_module(fixture[5:])
+            metafunc.parametrize(fixture, testdata, ids = [str(x) for x in testdata])
+
+def load_form_module(module):
+    return importlib.import_module("data.%s" % module).testdata
 
 
 class Application:
@@ -90,7 +101,6 @@ class Application:
         except:
             return False
 
+
     def destroy(self):
         self.wd.quit()
-
-

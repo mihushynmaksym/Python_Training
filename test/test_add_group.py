@@ -1,12 +1,12 @@
 
 from model.group import Group
-import pytest
-from data.add_group import constant as testdata
+
 __author__ = 'Max'
 
 
-@pytest.mark.parametrize("group", testdata, ids=[repr(x) for x in testdata])  # python bug with (x).
-def test_add_group(app,group):
+
+def test_add_group(app,data_groups):
+    group = data_groups
     app.group.find_group_button() # find button "group" on the page
     old_groups = app.group.get_group_list()  # Check lists + 1 (add group)
     app.group.create(group)  # init create group
@@ -15,13 +15,3 @@ def test_add_group(app,group):
     old_groups.append(group) # add group for old_group
     assert sorted(old_groups, key=Group.id_or_max) == sorted(new_group, key=Group.id_or_max) # assert lists
 
-
-# def test_add_empty_group(app):
-#     app.group.find_group_button() # find button "group" on the page
-#     old_groups = app.group.get_group_list()  # Check lists + 1 (add group)
-#     group = Group(name="cc ccc ", header="aa aa", footer="www ww")
-#     app.group.create(group) # init create group
-#     assert len(old_groups) + 1 == app.group.count()  # Check lists + 1 (add group) hesh
-#     new_group = app.group.get_group_list()  # Check lists + 1 (add group)
-#     old_groups.append(group)
-#     assert sorted(old_groups, key=Group.id_or_max) == sorted(new_group, key=Group.id_or_max) # assert lists
