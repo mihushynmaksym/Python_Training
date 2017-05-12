@@ -7,6 +7,7 @@ from fixture.sesion import SessionHelper
 from fixture.group import GroupHelper
 from fixture.contact import ContactHelper
 import importlib
+import jsonpickle
 __author__ = 'Max'
 
 
@@ -14,7 +15,7 @@ fixture = None
 target = None
 
 
-@pytest.fixture
+@pytest.fixture(scope="session", autouse=True) # run all tests in one session
 def app(request):
     global fixture
     global target
@@ -50,14 +51,24 @@ def pytest_generate_tests(metafunc):
         if fixture.startswith("data_"):
             testdata=load_form_module(fixture[5:])
             metafunc.parametrize(fixture, testdata, ids = [str(x) for x in testdata])
+        elif fixture.startswith("json_"):
+            testdata = load_form_json(fixture[5:])
+            metafunc.parametrize(fixture, testdata, ids = [str(x) for x in testdata])
 
 def load_form_module(module):
     return importlib.import_module("data.%s" % module).testdata
 
 
+def load_form_json(file):
+    # find dir with JSON file and read
+    with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "data/%s.json" % file)) as f:
+        return jsonpickle.decode(f.read())
+
+
 class Application:
 
     def __init__(self,browser,base_url):
+        # hooks for browsers (additional options) default = "chrome"
         if browser == "chrome":
             self.wd = webdriver.Chrome()
         elif browser == "firefox":
@@ -100,7 +111,6 @@ class Application:
             return True
         except:
             return False
-
 
     def destroy(self):
         self.wd.quit()
