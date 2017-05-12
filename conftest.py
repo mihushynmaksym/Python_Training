@@ -8,6 +8,7 @@ from fixture.group import GroupHelper
 from fixture.contact import ContactHelper
 import importlib
 import jsonpickle
+from fixture.db import DbFixture
 __author__ = 'Max'
 
 
@@ -20,13 +21,10 @@ def app(request):
     global fixture
     global target
     browser = request.config.getoption("--browser")
-    if target is None:
-        config_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), request.config.getoption("--target"))
-        with open(config_file) as f:  # set up permanent default directory for work
-            target = json.load(f)
+    web_config = load_config(request.config.getoption("--target"))["web"]
     if fixture is None or fixture.is_valid():
-        fixture = Application(browser,base_url=target["baseUrl"])
-    fixture.session.ensure_login(username=target["username"], password=target["password"])
+        fixture = Application(browser,base_url=web_config["baseUrl"])
+    fixture.session.ensure_login(username=web_config["username"], password=web_config["password"])
     return fixture
 
 
@@ -64,6 +62,24 @@ def load_form_json(file):
     with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "data/%s.json" % file)) as f:
         return jsonpickle.decode(f.read())
 
+@pytest.fixture(scope="session")
+def db(request):
+    db_config = load_config(request.config.getoption("--target"))["db"]
+    dbfixture = DbFixture(host=db_config["host"],name=db_config["user"],user=db_config["user"],password=db_config["password"])
+    return dbfixture
+    def fin():
+        dbfixture.destroy()
+    request.addfinalizer(fin)
+    return fixture
+
+def load_config(file):
+    #configurator for db
+    global target
+    if target is None:
+        config_file = os.path.join(os.path.dirname(os.path.abspath(__file__)),file)
+        with open(config_file) as f:  # set up permanent default directory for work
+            target = json.load(f)
+    return target
 
 class Application:
 
