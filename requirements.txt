@@ -3,5 +3,5 @@ selenium
 jsonpickle
 pony
 pymysql
---allow-external mysql-connector-python-rf
--mysql-connector-python-rf
+--allow-external mysql-connector-python
+-mysql-connector-python
