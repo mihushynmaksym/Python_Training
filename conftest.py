@@ -87,7 +87,7 @@ class Application:
     def __init__(self,browser,base_url):
         # hooks for browsers (additional options) default = "chrome"
         if browser == "chrome":
-            self.wd = webdriver.Chrome()
+            self.wd = webdriver.Chrome("E:\WebDrivers\chromedriver\chromedriver")
         elif browser == "firefox":
             self.wd = webdriver.Firefox()
         elif browser == "IE":
