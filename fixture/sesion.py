@@ -1,7 +1,5 @@
 __author__ = 'Max'
 
-from conftest import Application
-
 class SessionHelper:
 
     def __init__(self,app):
