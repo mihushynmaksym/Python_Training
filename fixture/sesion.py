@@ -9,7 +9,7 @@ class SessionHelper:
 
     def login(self,user_name, password):
         wd = self.app.wd
-        wd.get(self.conftest.application.base_url)
+        wd.get("http://localhost/addressbook/")
         wd.find_element_by_id("LoginForm").click()
         wd.find_element_by_name("user").click()
         wd.find_element_by_name("user").clear()
