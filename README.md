@@ -1,1 +1,3 @@
-# Repository_for_Training
+Test AddressbookPHP
+Project have hooks for browsers (Chrome,Opera,Firefox,IE,Edge), for run test use command py.test --browser=Chrome test\test_add_group.py (Where --browser=Chrome, browser) default option for browser = Chrome. Before you begin testing, make sure that you have installed globalPATH wedbrivers (ChromeDriver,Geckodriver,IEdriver,OperaDriver,EdgeDriver)
+Before start test use generator/group.py for random create JSON data (ascii_letters(AaBb...),digits(123...) and spases(" ")) used in parametrize test (default quantity test for test_add_group.py = 6), change quantity test data(header,footer,name) you can in generator/group.py n=5 (where 5 = quantity of tests), also you can add string.punctuation for special symbols like as (@!'"...). This line of code is in the project, need just uncomment.
